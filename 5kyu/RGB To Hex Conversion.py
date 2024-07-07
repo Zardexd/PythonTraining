@@ -11,14 +11,12 @@
 # 148, 0, 211   --> "9400D3"
 
 
-def clamp_value(value, min_value=0, max_value=255):
-    return max(min_value, min(value, max_value))
+def rgb_optimized(r, g, b):
+    r = max(0, min(r, 255))
+    g = max(0, min(g, 255))
+    b = max(0, min(b, 255))
 
+    hex_color = (r << 16) | (g << 8) | b
+    hex_str = f'{hex_color:06x}'.upper()
 
-def rgb(r, g, b):
-    r = '%02x' % clamp_value(r)
-    g = '%02x' % clamp_value(g)
-    b = '%02x' % clamp_value(b)
-    hex_value = f'{r}{g}{b}'
-    return hex_value.upper()
-
+    return hex_str
